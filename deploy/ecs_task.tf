@@ -24,6 +24,10 @@ resource "aws_ecs_task_definition" "app" {
           "valueFrom" = "${aws_secretsmanager_secret.app.arn}:DATABASE_URL::",
           "name" = "DATABASE_URL"
         },
+        {
+          "valueFrom" = "${aws_secretsmanager_secret.app.arn}:GOOSE_DBSTRING::",
+          "name" = "GOOSE_DBSTRING"
+        },
       ]
 
       dependsOn = [
