@@ -1,0 +1,12 @@
+INSERT INTO news (id, title, content, created_at, updated_at, deleted_at)
+VALUES 
+    ('123e4567-e89b-12d3-a456-426614174000', 'Breaking: New Technology Breakthrough', 'Scientists have discovered a revolutionary way to harness solar energy with twice the efficiency of current methods.', '2024-01-15 09:30:00', '2024-01-15 11:45:00', NULL),
+    ('123e4567-e89b-12d3-a456-426614174001', 'Local Community Garden Opens', 'Downtown community celebrates the opening of its first sustainable garden project.', '2024-02-01 14:20:00', '2024-02-02 10:15:00', NULL),
+    ('123e4567-e89b-12d3-a456-426614174002', 'Sports Team Wins Championship', 'Local team secures victory in national championship after 15-year drought.', '2024-02-15 20:45:00', NULL, NULL),
+    ('123e4567-e89b-12d3-a456-426614174003', 'New Educational Policy Announced', 'Government unveils comprehensive education reform plan for next academic year.', '2024-03-01 08:00:00', '2024-03-02 16:30:00', '2024-03-10 12:00:00'),
+    ('123e4567-e89b-12d3-a456-426614174004', 'Art Exhibition Opens Downtown', 'Contemporary artists showcase their work in annual city exhibition.', '2024-03-15 11:00:00', '2024-03-16 09:20:00', NULL),
+    ('123e4567-e89b-12d3-a456-426614174005', 'Economic Report Released', 'Quarter 1 economic indicators show positive growth trends in local businesses.', '2024-04-01 13:15:00', NULL, NULL),
+    ('123e4567-e89b-12d3-a456-426614174006', 'Environmental Initiative Launched', 'City launches new recycling program aimed at reducing plastic waste.', '2024-04-15 15:45:00', '2024-04-16 10:30:00', NULL),
+    ('123e4567-e89b-12d3-a456-426614174007', 'Tech Conference Announcement', 'Annual technology conference to feature leading innovators in AI and robotics.', '2024-05-01 09:00:00', '2024-05-02 14:20:00', '2024-05-10 16:00:00'),
+    ('123e4567-e89b-12d3-a456-426614174008', 'Healthcare Reform Update', 'New healthcare policies to be implemented starting next month.', '2024-05-15 11:30:00', NULL, NULL),
+    ('123e4567-e89b-12d3-a456-426614174009', 'Cultural Festival Preview', 'Upcoming summer festival to celebrate diverse cultural heritage with food and performances.', '2024-06-01 10:00:00', '2024-06-02 08:45:00', NULL);
