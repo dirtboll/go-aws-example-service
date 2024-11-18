@@ -54,8 +54,6 @@ variable "instance_block_size" {
   default     = 30
 }
 
-
-
 variable "app_domain" {
   type        = string
   description = "The domain used to expose app in HTTPS"
