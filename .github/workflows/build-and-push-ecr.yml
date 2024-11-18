@@ -1,0 +1,71 @@
+on:
+  pull_request: 
+    paths-ignore: 
+    - deploy
+    - .github/workflows/terraform-*
+    branches: 
+    - main
+  push:
+    tags:
+    - 'v[0-9]+.[0-9]+.[0-9]+'
+
+name: Docker Build
+
+permissions:
+  id-token: write 
+  contents: read
+
+jobs: 
+  build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Populate variables
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
+      - name: Configure ACR credentials
+        if: ${{ github.event_name == 'push' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ECR_ROLE_ARN }}
+
+      - name: Login to Amazon ECR
+        if: ${{ github.event_name == 'push' }}
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set up Docker Context for Buildx
+        id: buildx-context
+        run: |
+          docker context create builders
+      
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          version: latest
+          endpoint: builders
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        if: ${{ github.event_name == 'push' }}
+        with:
+          push: true
+          file: build/Dockerfile
+          tags: "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPO }}:${{ steps.vars.outputs.tag }}"
+          provenance: false
+          context: .
+
+      - name: Test build
+        uses: docker/build-push-action@v3
+        if: ${{ github.event_name != 'push' }}
+        with:
+          push: false
+          file: build/Dockerfile
+          tags: "go-news:latest"
+          context: .
